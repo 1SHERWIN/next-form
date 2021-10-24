@@ -1,8 +1,16 @@
 import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
+import { useState, useEffect } from 'react';
 
 export default function Home() {
+  const [success, setSuccess] = useState(false);
+  useEffect(() => {
+    if ( window.location.search.includes('success=true') ) {
+      setSuccess(true);
+    }
+  }, []);
+  
   return (
     <div className={styles.container}>
       <Head>
@@ -13,15 +21,20 @@ export default function Home() {
 
       <main className={styles.main}>
         <h1 className={styles.title}>
-          Welcome to my page using <a href="https://nextjs.org">next.js!</a>
+          Welcome to my page, by daddy <a href="https://youtu.be/4fsPFhmbwFY">Sherwin!</a>
         </h1>
+        {success && (
+          <p style={{ color: 'green'}}>
+            Successfully submitted form!
+          </p>
+        )}
 
-        <p className={styles.description}>
+        {/* <p className={styles.description}>
           Get started using this form: {' '}
-        </p>
+        </p> */}
         <div className={styles.grid}>
           <div className={styles.card}>
-            <form name="contact" method="POST" data-netlify="true">
+            <form name="contact" method="POST" data-netlify="true" action="/?success=true">
             <input type="hidden" name="contact" value="contact" />
 
               <p>
